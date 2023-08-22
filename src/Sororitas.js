@@ -174,12 +174,17 @@ const items = [
     }
 ];
 
-function Sororitas() {
+function Sororitas(hidden) {
     const [current, setCurrent] = useState(items[0])
     const [toggle, setToggle] = useState(0)
 
     const onClick = (e) => {
         setCurrent(items.find(item => item.key === e.key))
+    }
+    const prop = hidden
+    console.log(prop.hidden)
+    if (!prop.hidden) {
+        return;
     }
 
     return (

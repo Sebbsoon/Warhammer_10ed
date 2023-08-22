@@ -2,13 +2,13 @@ import './App.css';
 import { ConfigProvider, Layout, Menu, theme } from 'antd';
 import Sororitas from './Sororitas';
 import SumProbabilityTable from './ChargeTable';
-import Army from './Army';
 import { useState } from 'react';
 import Agents from './Agents';
+import List from './List';
 
 
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header } = Layout;
 const items = [
   {
     label: 'Charge Table',
@@ -23,9 +23,14 @@ const items = [
     key: 'agents'
   }
   ,
-  {
+ /* {
     label: 'Army',
     key: 'army'
+  },
+  */
+  {
+    label: 'List',
+    key: 'list'
   }
 ]
 
@@ -46,10 +51,13 @@ function App() {
           <Menu items={items} selectedKeys={current} onClick={onClick} mode='horizontal'></Menu>
         </Header>
 
-        {current === 'charge' && <SumProbabilityTable />}
-        {current === 'sororitas' && <Sororitas />}
-        {current === 'agents' && <Agents />}
-        {current === 'army' && <Army />}
+        {<SumProbabilityTable hidden={current === 'charge'} />}
+        {<Sororitas hidden={current === 'sororitas'} />}
+        {<Agents hidden={current === 'agents'} />}
+        {
+         // <Army hidden={current === 'army'} />
+        }
+        {<List hidden={current === 'list'} />}
 
       </Layout>
     </ConfigProvider>

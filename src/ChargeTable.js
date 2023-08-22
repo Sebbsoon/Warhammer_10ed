@@ -1,7 +1,7 @@
 import { Table } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import {  Layout} from 'antd';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content,  Sider } = Layout;
 
 const columns = [
     {
@@ -87,7 +87,12 @@ const data = [
     },
 ];
 
-const SumProbabilityTable = () => {
+function SumProbabilityTable(hidden) {
+    const prop = hidden
+    if (!prop.hidden) {
+        return;
+    }
+
     return (
         <Layout>
             <Sider></Sider>

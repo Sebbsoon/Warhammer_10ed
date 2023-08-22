@@ -1,4 +1,4 @@
-import { Typography, Button, Row, Col } from "antd"
+import { Typography, Button, Row, Col, Dropdown } from "antd"
 import Sider from "antd/es/layout/Sider"
 import Layout, { Content } from "antd/es/layout/layout"
 import { useState } from "react"
@@ -8,181 +8,235 @@ const { Text, Paragraph } = Typography
 const units = [
 
     {
-        name: 'Saint Celestine',
+        label: 'Saint Celestine',
         key: 'celestine',
-        pts: 150
+        pts: 150,
+        leaders: []
     },
     {
-        name: 'Morvenn Vahl',
+        label: 'Morvenn Vahl',
         key: 'morvenn',
-        pts: 135
+        pts: 135,
+        leaders: []
     },
     {
-        name: 'Daemonifuge',
+        label: 'Daemonifuge',
         key: 'daemonifuge',
-        pts: 80
+        pts: 80,
+        leaders: []
     },
     {
-        name: 'Canoness',
+        label: 'Canoness',
         key: 'canoness',
-        pts: 60
+        pts: 60,
+        leaders: []
     },
     {
-        name: 'Palantine',
+        label: 'Palantine',
         key: 'palantine',
-        pts: 55
+        pts: 55,
+        leaders: []
     },
     {
-        name: 'Battle Sisters',
+        label: 'Battle Sisters',
         key: 'battlesisters',
-        pts: 110
-    },
-    {
-        name: 'Sacresants',
-        key: 'sacresant',
-        pts: 65
-    },
-    {
-        name: 'Dominions',
-        key: 'dominion',
-        pts: 130
-    },
-    {
-        name: 'Retributors',
-        key: 'retributor',
-        pts: 130
-    },
-    {
-        name: 'Novitiates',
-        key: 'novitiate',
-        pts: 90
-    },
-    {
-        name: 'Repentia  5',
-        key: 'repentia',
-        pts: 75
-    },
-    {
-        name: 'Seraphim 5',
-        key: 'seraphim',
-        pts: 70
-    },
-    {
-        name: 'Zephyrim 5',
-        key: 'zephyrim',
-        pts: 70
-    },
-    {
-        name: 'Dialogus',
-        key: 'dialogus',
-        pts: 35
-    },
-    {
-        name: 'Dogmata',
-        key: 'dogmata',
-        pts: 50
-    },
-    {
-        name: 'Hospitaller',
-        key: 'hospitaller',
-        pts: 40
-    },
-    {
-        name: 'Imagifier',
-        key: 'imagifier',
-        pts: 40
-    },
-    {
-        name: 'Paragon Warsuits',
-        key: 'warsuit',
-        pts: 240
-    },
-    {
-        name: 'Rhino',
-        key: 'rhino',
-        pts: 80
-    },
-    {
-        name: 'Immolator',
-        key: 'immolator',
-        pts: 130
-    },
-    {
-        name: 'Exorcist',
-        key: 'exorcist',
-        pts: 140
-    }
+        pts: 110,
+        leaders: ['canoness', 'palantine', 'dialogus', 'dogmata', 'hospitaller', 'imagifier']
 
+    },
+    {
+        label: 'Sacresants',
+        key: 'sacresant',
+        pts: 65,
+        leaders: ['canoness', 'palabtine', 'dialogus', 'dogmata', 'hospitaller', 'imagifier']
+    },
+    {
+        label: 'Dominions',
+        key: 'dominion',
+        pts: 130,
+        leaders: ['palantine', 'dialogus', 'dogmata', 'hospitaller', 'imagifier']
+    },
+    {
+        label: 'Retributors',
+        key: 'retributor',
+        pts: 130,
+        leaders: ['dialogus', 'dogmata', 'hospitaller', 'imagifier']
+    },
+    {
+        label: 'Novitiates',
+        key: 'novitiate',
+        pts: 90,
+        leaders: ['palantine', 'dialogus', 'hospitaller']
+    },
+    {
+        label: 'Repentia  5',
+        key: 'repentia',
+        pts: 75,
+        leaders: []
+    },
+    {
+        label: 'Seraphim 5',
+        key: 'seraphim',
+        pts: 70,
+        leaders: ['celestine']
+    },
+    {
+        label: 'Zephyrim 5',
+        key: 'zephyrim',
+        pts: 70,
+        leaders: ['celestine']
+    },
+    {
+        label: 'Dialogus',
+        key: 'dialogus',
+        pts: 35,
+        leaders: []
+    },
+    {
+        label: 'Dogmata',
+        key: 'dogmata',
+        pts: 50,
+        leaders: []
+    },
+    {
+        label: 'Hospitaller',
+        key: 'hospitaller',
+        pts: 40,
+        leaders: []
+    },
+    {
+        label: 'Imagifier',
+        key: 'imagifier',
+        pts: 40, leaders: []
+
+    },
+    {
+        label: 'Paragon Warsuits',
+        key: 'warsuit',
+        pts: 240,
+        leaders: ['morvenn']
+    },
+    {
+        label: 'Rhino',
+        key: 'rhino',
+        pts: 80,
+        leaders: []
+    },
+    {
+        label: 'Immolator',
+        key: 'immolator',
+        pts: 130,
+        leaders: []
+    },
+    {
+        label: 'Exorcist',
+        key: 'exorcist',
+        pts: 140,
+        leaders: []
+    }
 ]
+
 const agents = [
     {
-        name: 'Callidus',
+        label: 'Callidus',
         key: 'callidus',
-        pts: 115
+        pts: 115,
+        leaders: []
     },
     {
-        name: 'Culexus',
+        label: 'Culexus',
         key: 'culexus',
-        pts: 85,
+        pts: 85, leaders: []
+
     },
     {
-        name: 'Eversor',
+        label: 'Eversor',
         key: 'eversor',
-        pts: 75
+        pts: 75, leaders: []
+
     },
     {
-        name: 'Vindacare',
+        label: 'Vindacare',
         key: 'vindicare',
-        pts: 80
+        pts: 80, leaders: []
+
+    },
+    {
+        label: 'Greyfax',
+        key: 'greyfax',
+        pts: 65, leaders: []
+
     }
 ]
 
 const enhancements = [
     {
-        name: 'Blade of Saint Ellynor',
+        label: 'Blade of Saint Ellynor',
         key: 'ellynor',
-        pts: 15
+        pts: 15, leaders: []
 
     },
     {
-        name: 'Litanies of Faith',
+        label: 'Litanies of Faith',
         key: 'litanies',
-        pts: 25
+        pts: 25, leaders: []
+
     },
     {
-        name: 'Mantle of Ophelia',
+        label: 'Mantle of Ophelia',
         key: 'ophelia',
-        pts: 20,
+        pts: 20, leaders: []
+
     },
     {
-        name: 'Saintly Example',
+        label: 'Saintly Example',
         key: 'example',
-        pts: 10
+        pts: 10, leaders: []
+
     }
 ]
 
+function Army(hidden) {
 
-
-function Army() {
     const [points, setPoints] = useState(0)
 
     function UnitRows(unit) {
         const [amount, setAmount] = useState(0)
+        function leaderOption(key) {
+            const leader = units.find(unit => unit.key === key)
 
+            return (
+                <option value={key}>{leader?.label}</option>
+            )
+        }
         return (
             <Row>
-                <Col span={5}>
-                    <Text type={amount === 0 ? 'secondary' : ''}>{unit.name}</Text>
+                <Col span={6}>
+                    <Text type={amount === 0 ? 'secondary' : ''}>{unit.label}</Text>
                 </Col>
-                <Button size="small" onClick={() => {
-                    setAmount(amount + 1)
-                    setPoints(points + unit.pts)
-                }}>+</Button>
-                <Paragraph > {amount} </Paragraph>
+
+                <Col span={6}>
+                    {unit.leaders.length === 0 || amount <= 0 ?
+                        <></>
+                        : <select name="leaders" id="leaders">
+                            <option value={""}></option>
+                            {unit.leaders.map((key) => leaderOption(key))}
+                        </select>}
+
+
+                </Col>
+
+
                 <Button size="small" onClick={() => {
                     setAmount(amount - 1);
                     setPoints(points - unit.pts)
                 }} disabled={amount <= 0}>-</Button>
+                <Paragraph > {amount} </Paragraph>
+                <Button size="small" onClick={() => {
+                    setAmount(amount + 1)
+                    setPoints(points + unit.pts)
+                }}>+</Button>
+
                 <Col offset={1} span={3}>
                     <Text>{unit.pts} pts</Text>
                 </Col>
@@ -191,6 +245,11 @@ function Army() {
         )
     }
 
+    const prop = hidden
+    console.log(prop.hidden)
+    if (!prop.hidden) {
+        return;
+    }
 
     return (
         <Layout>
@@ -204,7 +263,7 @@ function Army() {
                         {units.map(unit => UnitRows(unit))}
                     </Col>
                     <Col span={12}>
-                    <Paragraph>Agents</Paragraph>
+                        <Paragraph>Agents</Paragraph>
 
                         {agents.map(unit => UnitRows(unit))}
                         <Paragraph>Enhancements</Paragraph>
